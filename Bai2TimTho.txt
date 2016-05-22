@@ -1,0 +1,73 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
+
+
+public class Bai2TimTho {
+	
+	static final String FileName = "C:\\Users\\Phong Linh\\Downloads\\book1.txt";
+    static int linecount = 0;
+    static boolean text = false;
+ 	 
+    private static void readUsingBufferedReader(String FileName, Charset cs) throws IOException {
+        File file = new File(FileName);
+        FileInputStream fis = new FileInputStream(file);
+        InputStreamReader isr = new InputStreamReader(fis, cs);
+        BufferedReader br = new BufferedReader(isr);
+        String line;
+        boolean text = false;
+        String name = hamNhap().toUpperCase();
+        while ((line = br.readLine()) != null) {
+        	
+        	if(line.equals(name)){
+        		
+        		text = true;
+        	}
+        	
+        	if(text){
+        		
+        		if(line.equals(name)== false){
+        			
+        			if (line != null && line.length()!=0){
+        				
+		        		char a = line.charAt(0);
+		        		char c = line.charAt(line.length()-1);
+		        		if (Character.isUpperCase(a) && Character.isUpperCase(c)){
+		        			
+		        			break;
+		        			
+		        		}
+	        		}
+        		}
+        		
+        		System.out.println(line);
+        	}
+        	
+        	linecount ++;
+        }
+     
+        br.close();
+    }
+ 	    
+
+    public static String hamNhap(){
+    	
+    	Scanner input = new Scanner(System.in);
+    	System.out.println("Ten bai tho: ");
+    	String str = input.nextLine();
+		return str;
+    }
+    
+	 
+    public static void main(String[] args) throws IOException {
+    	
+        readUsingBufferedReader(FileName, StandardCharsets.UTF_8);
+
+    }
+
+}
